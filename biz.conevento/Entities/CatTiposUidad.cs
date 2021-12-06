@@ -4,18 +4,17 @@ using System.Collections.Generic;
 
 namespace biz.conevento.Entities
 {
-    public partial class CatCategoriaProducto
+    public partial class CatTiposUidad
     {
-        public CatCategoriaProducto()
+        public CatTiposUidad()
         {
             CatProductosServicios = new HashSet<CatProductosServicio>();
         }
 
-        public int Id { get; set; }
-        public string Categoria { get; set; }
-        public string Imagen { get; set; }
+        public int Int { get; set; }
+        public string TipoUnidad { get; set; }
         public bool? Activo { get; set; }
-        public string Descripción { get; set; }
+        public string Descripcion { get; set; }
 
         public virtual ICollection<CatProductosServicio> CatProductosServicios { get; set; }
     }

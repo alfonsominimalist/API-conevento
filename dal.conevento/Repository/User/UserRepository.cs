@@ -17,9 +17,10 @@ namespace dal.conevento.Repository
         private IConfiguration _config;
         private IEmailService _emailservice;
 
-        public UserRepository(Db_ConeventoContext context, IConfiguration config) : base(context)
+        public UserRepository(Db_ConeventoContext context, IConfiguration config, IEmailService emailService) : base(context)
         {
             _config = config;
+            _emailservice = emailService;
         }
 
         public string SendMail(string emailTo, string body, string subject)

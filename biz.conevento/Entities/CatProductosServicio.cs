@@ -6,16 +6,24 @@ namespace biz.conevento.Entities
 {
     public partial class CatProductosServicio
     {
+        public CatProductosServicio()
+        {
+            ListaProductosEventos = new HashSet<ListaProductosEvento>();
+        }
+
         public int Id { get; set; }
         public string Producto { get; set; }
         public string DescripcionCorta { get; set; }
         public string DescripcionLarga { get; set; }
-        public int? IdCategoriaProducto { get; set; }
-        public string Unidad { get; set; }
+        public int IdCategoriaProducto { get; set; }
         public string PrecioPorUnidad { get; set; }
         public int? DiasBloqueoAntes { get; set; }
         public int? DiasBloqueoDespues { get; set; }
+        public int TipoUnidad { get; set; }
+        public int? MinimoProductos { get; set; }
 
         public virtual CatCategoriaProducto IdCategoriaProductoNavigation { get; set; }
+        public virtual CatTiposUidad TipoUnidadNavigation { get; set; }
+        public virtual ICollection<ListaProductosEvento> ListaProductosEventos { get; set; }
     }
 }

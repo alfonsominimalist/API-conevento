@@ -127,7 +127,7 @@ namespace api.conevento.Controllers
                     body = body.Replace("{username}", $"{_user.Correo}");
                     body = body.Replace("{pass}", _pass);
 
-                    // _userRepository.SendMail(_user.Correo, body, "Recovery password");
+                     _userRepository.SendMail(_user.Correo, body, "Recovery password");
 
                     response.Result = _mapper.Map<UserDto>(_user);
                     response.Success = true;
@@ -173,7 +173,7 @@ namespace api.conevento.Controllers
                 body = body.Replace("{username}", $"{_user.correo}");
                 body = body.Replace("{pass}", _user.pass);
 
-                //  _userRepository.SendMail(_user.correo, body, "Bienvenido a Conevento");
+                  _userRepository.SendMail(_user.correo, body, "Bienvenido a Conevento");
 
                 response.Result = _user;
                 response.Success = true;

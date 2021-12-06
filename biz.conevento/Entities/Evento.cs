@@ -6,20 +6,25 @@ namespace biz.conevento.Entities
 {
     public partial class Evento
     {
+        public Evento()
+        {
+            ListaProductosEventos = new HashSet<ListaProductosEvento>();
+        }
+
         public int Id { get; set; }
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
         public string NombreEvento { get; set; }
-        public DateTime? Inicio { get; set; }
-        public DateTime? Fin { get; set; }
+        public DateTime? FechaInicio { get; set; }
+        public DateTime? FechaFin { get; set; }
         public int? FormaPago { get; set; }
         public string Telefono { get; set; }
         public string Correo { get; set; }
         public int? IdUsuario { get; set; }
-        public int Estado { get; set; }
-        public int Municipio { get; set; }
-        public int GenteEsperada { get; set; }
-        public string Direccion { get; set; }
+        public int? IdCatEstado { get; set; }
+        public int? IdCatMunicipio { get; set; }
+        public int? GenteEsperada { get; set; }
+        public string CalleNumero { get; set; }
         public string NumInt { get; set; }
         public string NumExt { get; set; }
         public string Cp { get; set; }
@@ -28,7 +33,11 @@ namespace biz.conevento.Entities
         public string DetallesEvento { get; set; }
         public DateTime? FechaPago { get; set; }
         public string ReferenciaPago { get; set; }
+        public bool? Pagado { get; set; }
+        public string ClaveSeguimientoCarrito { get; set; }
 
+        public virtual CatMunicipio IdCatMunicipioNavigation { get; set; }
         public virtual User IdUsuarioNavigation { get; set; }
+        public virtual ICollection<ListaProductosEvento> ListaProductosEventos { get; set; }
     }
 }

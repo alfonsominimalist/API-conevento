@@ -15,15 +15,14 @@ namespace biz.conevento.Servicies
             var response = "";
             try
             {
-                SmtpClient smtpClient = new SmtpClient( "smtp.office365.com",587);
-                // smtpClient.TargetName = "STARTTLS/smtp.office365.com";
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
                 smtpClient.EnableSsl = true;
                 smtpClient.Timeout = 10000;
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new NetworkCredential("NoReply.VIOLET@coneventodestinationservices.com", "Laurel22");
+                smtpClient.Credentials = new NetworkCredential("rodrigo.stps@gmail.com", "$dvs1188");
                 MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress("NoReply.VIOLET@coneventodestinationservices.com", "Conevento");
+                mailMessage.From = new MailAddress("contacto@conevento.com", "Conevento");
                 mailMessage.To.Add(email.To);
                 mailMessage.Subject = email.Subject;
                 mailMessage.SubjectEncoding = System.Text.Encoding.UTF8;

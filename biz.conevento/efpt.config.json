@@ -18,11 +18,27 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[Cat_estados]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Cat_Municipios]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[cat_productos_servicios]",
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[Cat_Tipos_uidad]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Eventos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Lista_productos_evento]",
          "ObjectType": 0
       },
       {
