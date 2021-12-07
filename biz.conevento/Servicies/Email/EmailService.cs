@@ -20,9 +20,9 @@ namespace biz.conevento.Servicies
                 smtpClient.Timeout = 10000;
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new NetworkCredential("rodrigo.stps@gmail.com", "$dvs1188");
+                smtpClient.Credentials = new NetworkCredential("rodrigo@minimalist.mx", "$dvs1188");
                 MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress("contacto@conevento.com", "Conevento");
+                mailMessage.From = new MailAddress("NoReply.VIOLET@premierdestinationservices.com", "Premier");
                 mailMessage.To.Add(email.To);
                 mailMessage.Subject = email.Subject;
                 mailMessage.SubjectEncoding = System.Text.Encoding.UTF8;

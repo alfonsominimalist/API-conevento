@@ -36,7 +36,11 @@ namespace api.conevento.Controllers
             _mapper = mapper;
             _logger = logger;
             _userRepository = userRepository;
+            
+      
+
         }
+
 
         [HttpGet]
         public ActionResult<ApiResponse<List<UserDto>>> GetAll()
@@ -116,13 +120,15 @@ namespace api.conevento.Controllers
             {
                 var _user = _mapper.Map<User>(_userRepository.Find(c => c.Correo == email)); if (_user != null)
                 {
-                    string _pass = "";
-                    _pass = _userRepository.CreatePassword(5);
+                   
+                    string pathimg = _userRepository.GetConfiguration("path_imagenes");
+                    string _pass = _userRepository.CreatePassword(5);
                     _user.Pass = _pass;
                     _userRepository.Update(_mapper.Map<User>(_user), _user.Id);
                     StreamReader reader = new StreamReader(Path.GetFullPath("TemplateMail/Email.html"));
                     string body = string.Empty;
                     body = reader.ReadToEnd();
+                    body = body.Replace("{path_imagenes}", pathimg);
                     body = body.Replace("{user}", _user.Nombres);
                     body = body.Replace("{username}", $"{_user.Correo}");
                     body = body.Replace("{pass}", _pass);
@@ -146,13 +152,15 @@ namespace api.conevento.Controllers
             {
                 response.Result = null;
                 response.Success = false;
-                response.Message = "Internal server error";
+                response.Message = "Internal server error: " + ex.ToString();
                 _logger.LogError($"Something went wrong: { ex.ToString() }");
                 return StatusCode(500, response);
             }
 
             return Ok(response);
         }
+
+
 
 
         [HttpPost("AddUser", Name = "AddUser")]
@@ -167,10 +175,12 @@ namespace api.conevento.Controllers
 
                 _userRepository.Add(_mapper.Map<User>(_user));
                 StreamReader reader = new StreamReader(Path.GetFullPath("TemplateMail/Email.html"));
+                string pathimg = _userRepository.GetConfiguration("path_imagenes");
                 string body = string.Empty;
                 body = reader.ReadToEnd();
                 body = body.Replace("{user}", _user.nombres);
                 body = body.Replace("{username}", $"{_user.correo}");
+                body = body.Replace("{path_imagenes}", pathimg);
                 body = body.Replace("{pass}", _user.pass);
 
                   _userRepository.SendMail(_user.correo, body, "Bienvenido a Conevento");

@@ -48,5 +48,13 @@ namespace dal.conevento.Repository
             return res.ToString();
         }
 
+        public string  GetConfiguration(string llave)
+        {
+           // string key = _config["path_imagenes"];
+            string key1 = _config[llave];
+            return key1;
+        }
+
+
     }
 }
