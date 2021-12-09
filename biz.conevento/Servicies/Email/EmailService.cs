@@ -22,7 +22,7 @@ namespace biz.conevento.Servicies
                 smtpClient.UseDefaultCredentials = false;
                 smtpClient.Credentials = new NetworkCredential("rodrigo@minimalist.mx", "$dvs1188");
                 MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress("NoReply.VIOLET@premierdestinationservices.com", "Premier");
+                mailMessage.From = new MailAddress("NoReply.VIOLET@premierdestinationservices.com", "Conevento");
                 mailMessage.To.Add(email.To);
                 mailMessage.Subject = email.Subject;
                 mailMessage.SubjectEncoding = System.Text.Encoding.UTF8;

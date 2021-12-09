@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 namespace biz.conevento.Entities
 {
-    public partial class CatTiposUidad
+    public partial class CatTiposUnidad
     {
-        public CatTiposUidad()
+        public CatTiposUnidad()
         {
             CatProductosServicios = new HashSet<CatProductosServicio>();
         }
 
-        public int Int { get; set; }
+        public int Id { get; set; }
         public string TipoUnidad { get; set; }
         public bool? Activo { get; set; }
         public string Descripcion { get; set; }

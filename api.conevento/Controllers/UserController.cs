@@ -36,9 +36,6 @@ namespace api.conevento.Controllers
             _mapper = mapper;
             _logger = logger;
             _userRepository = userRepository;
-            
-      
-
         }
 
 

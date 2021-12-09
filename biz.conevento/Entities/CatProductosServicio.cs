@@ -16,14 +16,16 @@ namespace biz.conevento.Entities
         public string DescripcionCorta { get; set; }
         public string DescripcionLarga { get; set; }
         public int IdCategoriaProducto { get; set; }
-        public string PrecioPorUnidad { get; set; }
+        public decimal? PrecioPorUnidad { get; set; }
         public int? DiasBloqueoAntes { get; set; }
         public int? DiasBloqueoDespues { get; set; }
-        public int TipoUnidad { get; set; }
+        public int IdCatTipoUnidad { get; set; }
         public int? MinimoProductos { get; set; }
+        public string ImagenSeleccion { get; set; }
+        public bool? Activo { get; set; }
 
+        public virtual CatTiposUnidad IdCatTipoUnidadNavigation { get; set; }
         public virtual CatCategoriaProducto IdCategoriaProductoNavigation { get; set; }
-        public virtual CatTiposUidad TipoUnidadNavigation { get; set; }
         public virtual ICollection<ListaProductosEvento> ListaProductosEventos { get; set; }
     }
 }

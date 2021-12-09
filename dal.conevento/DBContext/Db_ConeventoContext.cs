@@ -21,7 +21,7 @@ namespace dal.conevento.DBContext
         public virtual DbSet<CatEstado> CatEstados { get; set; }
         public virtual DbSet<CatMunicipio> CatMunicipios { get; set; }
         public virtual DbSet<CatProductosServicio> CatProductosServicios { get; set; }
-        public virtual DbSet<CatTiposUidad> CatTiposUidads { get; set; }
+        public virtual DbSet<CatTiposUnidad> CatTiposUnidads { get; set; }
         public virtual DbSet<Evento> Eventos { get; set; }
         public virtual DbSet<ListaProductosEvento> ListaProductosEventos { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -44,8 +44,10 @@ namespace dal.conevento.DBContext
                     .HasColumnName("descripción")
                     .HasMaxLength(350);
 
-                entity.Property(e => e.Imagen)
-                    .HasColumnName("imagen")
+                entity.Property(e => e.Imagen).HasColumnName("imagen");
+
+                entity.Property(e => e.ImagenSeleccion)
+                    .HasColumnName("imagen_seleccion")
                     .HasMaxLength(350);
             });
 
@@ -59,7 +61,7 @@ namespace dal.conevento.DBContext
 
                 entity.Property(e => e.Estado)
                     .HasColumnName("estado")
-                    .HasMaxLength(10)
+                    .HasMaxLength(100)
                     .IsFixedLength();
             });
 
@@ -77,7 +79,7 @@ namespace dal.conevento.DBContext
                 entity.Property(e => e.IdCatEstado).HasColumnName("id_cat_estado");
 
                 entity.Property(e => e.Municipio)
-                    .HasMaxLength(10)
+                    .HasMaxLength(100)
                     .IsFixedLength();
 
                 entity.HasOne(d => d.IdCatEstadoNavigation)
@@ -91,9 +93,9 @@ namespace dal.conevento.DBContext
             {
                 entity.ToTable("cat_productos_servicios");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Activo).HasColumnName("activo");
 
                 entity.Property(e => e.DescripcionCorta)
                     .HasColumnName("descripcion_corta")
@@ -107,52 +109,54 @@ namespace dal.conevento.DBContext
 
                 entity.Property(e => e.DiasBloqueoDespues).HasColumnName("dias_bloqueo_despues");
 
+                entity.Property(e => e.IdCatTipoUnidad).HasColumnName("id_cat_tipo_unidad");
+
                 entity.Property(e => e.IdCategoriaProducto).HasColumnName("id_categoria_producto");
+
+                entity.Property(e => e.ImagenSeleccion)
+                    .HasColumnName("imagen_seleccion")
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.MinimoProductos).HasColumnName("minimo_productos");
 
                 entity.Property(e => e.PrecioPorUnidad)
                     .HasColumnName("precio_por_unidad")
-                    .HasMaxLength(50);
+                    .HasColumnType("numeric(10, 2)");
 
                 entity.Property(e => e.Producto)
                     .IsRequired()
                     .HasColumnName("producto")
                     .HasMaxLength(50);
 
-                entity.Property(e => e.TipoUnidad).HasColumnName("tipo_unidad");
+                entity.HasOne(d => d.IdCatTipoUnidadNavigation)
+                    .WithMany(p => p.CatProductosServicios)
+                    .HasForeignKey(d => d.IdCatTipoUnidad)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_cat_productos_servicios_Cat_Tipos_unidad1");
 
                 entity.HasOne(d => d.IdCategoriaProductoNavigation)
                     .WithMany(p => p.CatProductosServicios)
                     .HasForeignKey(d => d.IdCategoriaProducto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_cat_productos_servicios_Cat_categoria_productos");
-
-                entity.HasOne(d => d.TipoUnidadNavigation)
-                    .WithMany(p => p.CatProductosServicios)
-                    .HasForeignKey(d => d.TipoUnidad)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_cat_productos_servicios_Cat_Tipos_uidad");
             });
 
-            modelBuilder.Entity<CatTiposUidad>(entity =>
+            modelBuilder.Entity<CatTiposUnidad>(entity =>
             {
-                entity.HasKey(e => e.Int);
+                entity.ToTable("Cat_Tipos_unidad");
 
-                entity.ToTable("Cat_Tipos_uidad");
-
-                entity.Property(e => e.Int).HasColumnName("int");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Activo).HasColumnName("activo");
 
                 entity.Property(e => e.Descripcion)
                     .HasColumnName("descripcion")
-                    .HasMaxLength(10)
+                    .HasMaxLength(500)
                     .IsFixedLength();
 
                 entity.Property(e => e.TipoUnidad)
                     .HasColumnName("tipo_unidad")
-                    .HasMaxLength(10)
+                    .HasMaxLength(100)
                     .IsFixedLength();
             });
 
@@ -160,11 +164,8 @@ namespace dal.conevento.DBContext
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Apellidos)
-                    .HasColumnName("apellidos")
-                    .HasMaxLength(150);
-
                 entity.Property(e => e.CalleNumero)
+                    .IsRequired()
                     .HasColumnName("calle_numero")
                     .HasMaxLength(500);
 
@@ -173,13 +174,13 @@ namespace dal.conevento.DBContext
                     .HasMaxLength(50);
 
                 entity.Property(e => e.Colonia)
+                    .IsRequired()
                     .HasColumnName("colonia")
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.Correo)
                     .HasColumnName("correo")
-                    .HasMaxLength(50);
+                    .HasMaxLength(150);
 
                 entity.Property(e => e.Cp)
                     .HasColumnName("cp")
@@ -193,12 +194,12 @@ namespace dal.conevento.DBContext
                     .HasColumnName("fecha_creacion")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.FechaFin)
-                    .HasColumnName("fecha_fin")
+                entity.Property(e => e.FechaHoraFin)
+                    .HasColumnName("fecha_hora_fin")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.FechaInicio)
-                    .HasColumnName("fecha_inicio")
+                entity.Property(e => e.FechaHoraInicio)
+                    .HasColumnName("fecha_hora_inicio")
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.FechaPago)
@@ -209,26 +210,16 @@ namespace dal.conevento.DBContext
 
                 entity.Property(e => e.GenteEsperada).HasColumnName("gente_esperada");
 
-                entity.Property(e => e.IdCatEstado).HasColumnName("id_cat_estado");
-
                 entity.Property(e => e.IdCatMunicipio).HasColumnName("id_cat_municipio");
 
                 entity.Property(e => e.IdUsuario).HasColumnName("id_usuario");
 
-                entity.Property(e => e.NombreEvento)
-                    .HasColumnName("nombre_evento")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Nombres)
-                    .HasColumnName("nombres")
+                entity.Property(e => e.NombreContratane)
+                    .HasColumnName("nombre_contratane")
                     .HasMaxLength(150);
 
-                entity.Property(e => e.NumExt)
-                    .HasColumnName("num_ext")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.NumInt)
-                    .HasColumnName("num_int")
+                entity.Property(e => e.NombreEvento)
+                    .HasColumnName("nombre_evento")
                     .HasMaxLength(50);
 
                 entity.Property(e => e.Pagado).HasColumnName("pagado");
@@ -244,6 +235,7 @@ namespace dal.conevento.DBContext
                 entity.HasOne(d => d.IdCatMunicipioNavigation)
                     .WithMany(p => p.Eventos)
                     .HasForeignKey(d => d.IdCatMunicipio)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Eventos_Cat_Municipios");
 
                 entity.HasOne(d => d.IdUsuarioNavigation)

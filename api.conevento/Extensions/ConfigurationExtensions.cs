@@ -41,7 +41,9 @@ namespace api.conevento.Extensions
         public static void ConfigureRepositories(this IServiceCollection services)
         {
             services.AddTransient<IUserRepository, UserRepository>();
-           
+            services.AddTransient<ICat_categoria_productosRepository, Cat_categoria_productosRepository>();
+            services.AddTransient<Icat_productos_serviciosRepository, cat_productos_serviciosRespository>();
+            services.AddTransient<IEventosRepository, EventosRepository>();
         }
         
         public static void ConfigureServices(this IServiceCollection services)

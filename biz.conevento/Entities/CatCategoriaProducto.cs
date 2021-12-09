@@ -16,6 +16,7 @@ namespace biz.conevento.Entities
         public string Imagen { get; set; }
         public bool? Activo { get; set; }
         public string Descripción { get; set; }
+        public string ImagenSeleccion { get; set; }
 
         public virtual ICollection<CatProductosServicio> CatProductosServicios { get; set; }
     }
