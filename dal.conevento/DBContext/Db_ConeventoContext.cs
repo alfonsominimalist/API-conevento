@@ -109,6 +109,8 @@ namespace dal.conevento.DBContext
 
                 entity.Property(e => e.DiasBloqueoDespues).HasColumnName("dias_bloqueo_despues");
 
+                entity.Property(e => e.EspecificarTiempo).HasColumnName("especificar_tiempo");
+
                 entity.Property(e => e.IdCatTipoUnidad).HasColumnName("id_cat_tipo_unidad");
 
                 entity.Property(e => e.IdCategoriaProducto).HasColumnName("id_categoria_producto");
@@ -250,13 +252,13 @@ namespace dal.conevento.DBContext
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.CantidadSolicitada).HasColumnName("cantidad_solicitada");
+                entity.Property(e => e.CantidadHoras).HasColumnName("cantidad_horas");
+
+                entity.Property(e => e.CantidadUnidades).HasColumnName("cantidad_unidades");
 
                 entity.Property(e => e.IdCatProducto).HasColumnName("id_cat_producto");
 
                 entity.Property(e => e.IdEvento).HasColumnName("id_Evento");
-
-                entity.Property(e => e.UnidadesIncluidas).HasColumnName("unidades_incluidas");
 
                 entity.HasOne(d => d.IdCatProductoNavigation)
                     .WithMany(p => p.ListaProductosEventos)

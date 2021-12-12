@@ -14,8 +14,8 @@ namespace api.conevento.Models.Events
         public int Id { get; set; }
         public int IdEvento { get; set; }
         public int IdCatProducto { get; set; }
-        public int CantidadSolicitada { get; set; }
-        public int UnidadesIncluidas { get; set; }
+        public int CantidadUnidades { get; set; }
+        public int CantidadHoras { get; set; }
 
     }
 }

@@ -23,6 +23,7 @@ namespace biz.conevento.Entities
         public int? MinimoProductos { get; set; }
         public string ImagenSeleccion { get; set; }
         public bool? Activo { get; set; }
+        public bool? EspecificarTiempo { get; set; }
 
         public virtual CatTiposUnidad IdCatTipoUnidadNavigation { get; set; }
         public virtual CatCategoriaProducto IdCategoriaProductoNavigation { get; set; }

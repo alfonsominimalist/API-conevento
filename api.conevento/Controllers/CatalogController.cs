@@ -68,7 +68,7 @@ namespace api.conevento.Controllers
                     foreach (CatCategoriaProducto element in categorias)
                     {
                         element.Imagen = pathimg + element.Imagen;
-                        element.ImagenSeleccion = pathimg + element.Imagen;
+                        element.ImagenSeleccion = pathimg + element.ImagenSeleccion;
                     }
                 }
 

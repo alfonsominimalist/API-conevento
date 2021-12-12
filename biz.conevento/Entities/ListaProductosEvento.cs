@@ -9,8 +9,8 @@ namespace biz.conevento.Entities
         public int Id { get; set; }
         public int IdEvento { get; set; }
         public int IdCatProducto { get; set; }
-        public int CantidadSolicitada { get; set; }
-        public int UnidadesIncluidas { get; set; }
+        public int CantidadUnidades { get; set; }
+        public int CantidadHoras { get; set; }
 
         public virtual CatProductosServicio IdCatProductoNavigation { get; set; }
         public virtual Evento IdEventoNavigation { get; set; }
